@@ -21,7 +21,7 @@ dependencies:
     git: git://github.com/salkuadrat/slide_drawer.git
 ```
 
-You should then run `flutter packages upgrade` or update your packages in IntelliJ.
+Then run `flutter packages upgrade` or update your packages in IntelliJ.
 
 ## Example Project
 
