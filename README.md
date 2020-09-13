@@ -37,7 +37,7 @@ import 'package:slide_drawer/slide_drawer.dart';
 
 Then wrap your app home page with SlideDrawer. 
 
-To use the basic SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer backgroundColor, and theme brightness as drawer brightness.
+To use the basic SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer background, and theme brightness as drawer brightness.
 
 ```
 class App extends StatelessWidget {
