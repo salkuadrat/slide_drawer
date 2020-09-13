@@ -23,12 +23,11 @@ You should then run `flutter packages upgrade` or update your packages in Intell
 
 ## Example Project
 
-You can see `example` folder directly to learn the many ways
-you can use SlideDrawer in your app.
+You can see the `example` folder to learn many different ways you can use SlideDrawer in your app.
 
 ## How To Use
 
-As usual, you need to import SliderDrawer package:
+As usual, you need to import the package package.
 
 ```
 import 'package:slide_drawer/slide_drawer.dart';
@@ -36,7 +35,7 @@ import 'package:slide_drawer/slide_drawer.dart';
 
 Then wrap your app home page with SlideDrawer. 
 
-To use the standard SlideDrawer, you only need to define items to generate list menu in your drawer. The drawer will use your default theme color as drawer backgroundColor, and theme brightness as drawer brightness.
+To use the standard SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer backgroundColor, and theme brightness as drawer brightness.
 
 ```
 class App extends StatelessWidget {
@@ -64,7 +63,7 @@ class App extends StatelessWidget {
 }
 ```
 
-Then you need to connect menu button in your home page AppBar with SlideDrawer.
+Then you need to set onPressed menu button in your AppBar to toggle SlideDrawer.
 
 ```
 appBar: AppBar(
