@@ -37,7 +37,7 @@ import 'package:slide_drawer/slide_drawer.dart';
 
 Then wrap your app home page with SlideDrawer. 
 
-To use the standard SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer backgroundColor, and theme brightness as drawer brightness.
+To use the basic SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer backgroundColor, and theme brightness as drawer brightness.
 
 ```
 class App extends StatelessWidget {
@@ -65,7 +65,7 @@ class App extends StatelessWidget {
 }
 ```
 
-Then you need to set onPressed menu button in your AppBar to toggle SlideDrawer.
+Then you need to set onPressed in your AppBar menu button to toggle SlideDrawer.
 
 ```
 appBar: AppBar(
@@ -79,9 +79,9 @@ appBar: AppBar(
 ),
 ```
 
-### With Icons
+### Icons
 
-You can also use icon in your menu items.
+You can also use icon for your menu items.
 
 ```
 home: SlideDrawer(
@@ -98,12 +98,12 @@ home: SlideDrawer(
 
 ### Custom Background
 
-SlideDrawer also come with parameter backgroundColor and gradientColor. 
+SlideDrawer also come with parameter backgroundColor and backgroundGradient. 
 
-If you specify gradientColor, the drawer will use it as background. If not, it will use backgroundColor. If you also not specify backgroundColor, it will use the default theme color as background.
+If you specify backgroundGradient, the drawer will use it as background. If not, it will use backgroundColor. If you also not specify backgroundColor, it will use the default theme color as background.
 
-It's good practice to specify brightness (dark or light) if you use gradientColor or backgroundColor. 
-If you use dark color in your gradientColor or backgroundColor, use Brightness.dark.
+It's good practice to specify brightness (dark or light) if you use backgroundGradient or backgroundColor. 
+If you use dark color in your backgroundGradient or backgroundColor, use Brightness.dark.
 If you use light color, use Brightness.light.
 
 ```
@@ -148,7 +148,7 @@ home: SlideDrawer(
 
 ### Custom Head Drawer
 
-It's advisable to set alignment to SlideDrawerAlignment.start when you use custom headDrawer.
+It's advisable to set alignment to SlideDrawerAlignment.start when you use headDrawer.
 
 ```
 home: SlideDrawer(
@@ -169,8 +169,8 @@ home: SlideDrawer(
 
 ### Custom Content Drawer
 
-In the previous example, you use items to let the SlideDrawer generate menu inside the drawer.
-You can also use your own widget to set as the content drawer.
+In the previous example, you use items to let the SlideDrawer generate menu in the content drawer.
+You can also use any other widget as the content drawer.
 
 ```
 home: SlideDrawer(
@@ -193,7 +193,7 @@ home: SlideDrawer(
 
 ### Custom Full Drawer
 
-If you have your own creative idea for the full widget inside the drawer, don't worry. You can also specify it in your SlideDrawer. If you use this way, SlideDrawer will use style from your custom drawer and ignore any value you specify in backgroundColor, gradientColor, and brightness.
+If you have your own creative idea for the full widget inside the drawer, don't worry. You can use it too in your SlideDrawer by passing it to drawer. In this way, SlideDrawer will use style of your custom drawer and ignore any value in backgroundColor, gradientColor, and brightness.
 
 ```
 home: SlideDrawer(
@@ -219,9 +219,11 @@ home: SlideDrawer(
 ),
 ```
 
-### Nitty Bitty
+### Others
 
-The default SlideDrawer animate your home with translate to the right, scale it, and rotate it at y axis with some small angle (pi / 24 radian or 180 / 24 degree = 7.5 degree). If you don't like this, you can disable the rotation by setting isRotate to false.
+The default SlideDrawer animate your home by move it to the right (offsetFromRight default to 60), scale it, and rotate it at y axis with some small angle (pi / 24 radian or 180 / 24 degree = 7.5 degree). 
+
+If you don't want to rotate, you can disable the rotation by setting isRotate to false.
 
 ```
 home: SlideDrawer(
@@ -254,7 +256,22 @@ home: SlideDrawer(
 ),
 ```
 
-You can also use custom curve and duration if you want (the default curve is Linear and 300ms).
+Or you can change offsetFromRight to make it move a little closer or farther.
+```
+home: SlideDrawer(
+  offsetFromRight: 80.0,
+  items: [
+    MenuItem('Home', icon: Icons.home, onTap: (){}),
+    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+  ],
+  child: HomePage(),
+),
+```
+
+You can also use custom curve and duration if you want. The default values are linear and 300ms. You can also specify curveReverse and durationReverse to change curve and duration of animation in the reverse direction.
 
 ```
 home: SlideDrawer(
