@@ -1,6 +1,8 @@
 # SlideDrawer
 
-An easy way to create a drawer with sliding animation.
+An easy way to create a drawer with cool sliding animation.
+
+![](example.gif)
 
 ## Getting Started
 
@@ -193,6 +195,7 @@ home: SlideDrawer(
 
 If you have your own creative idea for the full widget inside the drawer, don't worry. You can also specify it in your SlideDrawer. If you use this way, SlideDrawer will use style from your custom drawer and ignore any value you specify in backgroundColor, gradientColor, and brightness.
 
+```
 home: SlideDrawer(
   drawer: Container(
     color: Colors.teal,
@@ -240,6 +243,23 @@ Or use a custom rotateAngle if you prefer to change the rotation a little bit lo
 home: SlideDrawer(
   isRotate: true,
   rotateAngle: pi / 36,
+  items: [
+    MenuItem('Home', icon: Icons.home, onTap: (){}),
+    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+  ],
+  child: HomePage(),
+),
+```
+
+You can also use custom curve and duration if you want (the default curve is Linear and 300ms).
+
+```
+home: SlideDrawer(
+  curve: Curves.easeInOut,
+  duration: Duration(milliseconds: 200),
   items: [
     MenuItem('Home', icon: Icons.home, onTap: (){}),
     MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
