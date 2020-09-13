@@ -113,6 +113,7 @@ class MenuItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: _leading,
+      contentPadding: EdgeInsets.only(left: _leading == null ? 24 : 16),
       title: Text(item.title),
       onTap: item.onTap,
     );

@@ -106,7 +106,7 @@ class SlideDrawer extends StatefulWidget {
 
 class _SlideDrawerState extends State<SlideDrawer> 
   with SingleTickerProviderStateMixin {
-
+  
   bool _canBeDragged = false;
   double _minDragStartEdge = 60;
   double get _maxSlide => MediaQuery.of(context).size.width - widget.offsetFromRight;
