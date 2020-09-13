@@ -1,6 +1,6 @@
 # SlideDrawer
 
-An easy way to create a drawer with cool sliding animation.
+An easy way to use a drawer with cool sliding animation.
 
 ![](example.gif)
 
