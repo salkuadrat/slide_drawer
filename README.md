@@ -29,7 +29,7 @@ You can see the `example` folder to learn many different ways you can use SlideD
 
 ## How To Use
 
-As usual, you need to import the package package.
+As usual, you need to import the package.
 
 ```
 import 'package:slide_drawer/slide_drawer.dart';
@@ -50,6 +50,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // wrap your HomePage with SlideDrawer
       home: SlideDrawer(
         items: [
           MenuItem('Home', onTap: (){}),
