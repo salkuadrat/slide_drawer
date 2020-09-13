@@ -45,6 +45,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
+      // SlideDrawer will use style from this theme
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
