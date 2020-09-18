@@ -10,7 +10,7 @@ You should add dependency in your flutter project.
 
 ```yaml
 dependencies:
-  slide_drawer: ^1.0.0
+  slide_drawer: ^1.0.1
 ```
 
 Or reference the git repo directly:
@@ -18,7 +18,7 @@ Or reference the git repo directly:
 ```yaml
 dependencies:
   slide_drawer:
-    git: git://github.com/salkuadrat/slide_drawer.git
+    git: https://github.com/salkuadrat/slide_drawer.git
 ```
 
 Then run `flutter packages upgrade` or update your packages in IntelliJ.

@@ -65,8 +65,6 @@ class SlideDrawerContainer extends StatelessWidget {
     bool _isAlignTop = _alignment == SlideDrawerAlignment.start;
     
     return Material(
-      shadowColor: Colors.transparent,
-      borderOnForeground: false,
       child: _hasDrawer ? drawer : Container(
         decoration: _hasGradient 
           ? BoxDecoration(gradient: backgroundGradient) 
