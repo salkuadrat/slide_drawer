@@ -4,16 +4,16 @@ class MenuItem {
   /// Widget to be used for the leading of [MenuTtemWidget]
   ///
   /// If this is null, then it will use Icon with IconData from [icon]
-  final Widget leading;
+  final Widget? leading;
 
   /// Icon to be used in the leading widget of [MenuItemWidget]
-  final IconData icon;
-  
+  final IconData? icon;
+
   /// Text to be used for the title of [MenuItemWidget]
   final String title;
 
   /// Function to be called when this [MenuItemWidget] is tapped
-  final Function onTap;
+  final void Function()? onTap;
 
   bool get hasIcon => icon != null;
   bool get hasLeading => leading != null;

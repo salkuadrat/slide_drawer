@@ -1,19 +1,25 @@
 # SlideDrawer
 
-An easy way to use a drawer with cool sliding animation.
+An easy way to use drawer in Flutter with cool sliding animation.
 
 ![](example.gif)
 
 ## Getting Started
 
-You should add dependency in your flutter project.
+Add dependency in your flutter project.
+
+```
+$ flutter pub add slide_drawer
+```
+
+or
 
 ```yaml
 dependencies:
-  slide_drawer: ^1.0.1
+  slide_drawer: ^1.0.2
 ```
 
-Or reference the git repo directly:
+or
 
 ```yaml
 dependencies:
@@ -21,25 +27,25 @@ dependencies:
     git: https://github.com/salkuadrat/slide_drawer.git
 ```
 
-Then run `flutter packages upgrade` or update your packages in IntelliJ.
+Then run `flutter pub get`.
 
-## Example Project
+## Example
 
-You can see the `example` folder to learn many different ways you can use SlideDrawer in your app.
+You can see the `example` folder to learn many different ways of using SlideDrawer in your app.
 
-## How To Use
+## Usage
 
-As usual, you need to import the package.
+As usual, we need to import the package.
 
-```
+```dart
 import 'package:slide_drawer/slide_drawer.dart';
 ```
 
-Then wrap your app home page with SlideDrawer. 
+Then wrap the app home page with SlideDrawer. 
 
 To use the basic SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer background, and theme brightness as drawer brightness.
 
-```
+```dart
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -67,9 +73,9 @@ class App extends StatelessWidget {
 }
 ```
 
-Then you need to set onPressed in your AppBar menu button to toggle SlideDrawer.
+Then set onPressed in your AppBar menu button to toggle SlideDrawer.
 
-```
+```dart
 appBar: AppBar(
   title: Text(title),
   leading: IconButton(
@@ -83,9 +89,9 @@ appBar: AppBar(
 
 ### Icons
 
-You can also use icon for your menu items.
+We can also use icon for menu items.
 
-```
+```dart
 home: SlideDrawer(
   items: [
     MenuItem('Home', icon: Icons.home, onTap: (){}),
@@ -102,13 +108,13 @@ home: SlideDrawer(
 
 SlideDrawer also come with parameter backgroundColor and backgroundGradient. 
 
-If you specify backgroundGradient, the drawer will use it as background. If not, it will use backgroundColor. If you also not specify backgroundColor, it will use the default theme color as background.
+If we specify backgroundGradient, the drawer will use it as background. If not, it will use backgroundColor. If we also not specify backgroundColor, it will use the default theme color as background.
 
-It's good practice to specify brightness (dark or light) if you use backgroundGradient or backgroundColor. 
-If you use dark color in your backgroundGradient or backgroundColor, use Brightness.dark.
-If you use light color, use Brightness.light.
+It's good practice to specify brightness (dark or light) if we use backgroundGradient or backgroundColor. 
+If we set dark color in your backgroundGradient or backgroundColor, use Brightness.dark.
+If we set light color, use Brightness.light.
 
-```
+```dart
 // SlideDrawer with custom gradient as background.
 home: SlideDrawer(
   items: [
@@ -132,7 +138,7 @@ home: SlideDrawer(
 ),
 ```
 
-```
+```dart
 // SlideDrawer with custom color as background.
 home: SlideDrawer(
   items: [
@@ -152,7 +158,7 @@ home: SlideDrawer(
 
 It's advisable to set alignment to SlideDrawerAlignment.start when you use headDrawer.
 
-```
+```dart
 home: SlideDrawer(
   alignment: SlideDrawerAlignment.start,
   headDrawer: Image.asset('boys.png'),
@@ -171,10 +177,10 @@ home: SlideDrawer(
 
 ### Custom Content Drawer
 
-In the previous example, you use items to let the SlideDrawer generate menu in the content drawer.
-You can also use any other widget as the content drawer.
+In the previous example, we use items and let the SlideDrawer generate menu in the content drawer.
+But we can also set any custom widget as the content drawer.
 
-```
+```dart
 home: SlideDrawer(
   brightness: Brightness.dark,
   contentDrawer: Container(
@@ -195,9 +201,9 @@ home: SlideDrawer(
 
 ### Custom Full Drawer
 
-If you have your own creative idea for the full widget inside the drawer, don't worry. You can use it too in your SlideDrawer by passing it to drawer. In this way, SlideDrawer will use style of your custom drawer and ignore any value in backgroundColor, gradientColor, and brightness.
+If you have your own creative idea for the full widget inside the drawer, don't worry. We can use it in  SlideDrawer by passing it to drawer. In this way, SlideDrawer will use style of custom drawer and ignore any value in backgroundColor, gradientColor, and brightness.
 
-```
+```dart
 home: SlideDrawer(
   drawer: Container(
     color: Colors.teal,
@@ -223,11 +229,11 @@ home: SlideDrawer(
 
 ### Others
 
-The default SlideDrawer animate your home by move it to the right (offsetFromRight default to 60), scale it, and rotate it at y axis with some small angle (pi / 24 radian or 180 / 24 degree = 7.5 degree). 
+The default SlideDrawer animate home page by move it to the right (offsetFromRight default to 60), scale it, and rotate it at y axis with some small angle (pi / 24 radian or 180 / 24 degree = 7.5 degree). 
 
-If you don't want to rotate, you can disable the rotation by setting isRotate to false.
+If don't want to rotate, we can disable the rotation by setting isRotate to false.
 
-```
+```dart
 home: SlideDrawer(
   isRotate: false,
   items: [
@@ -241,9 +247,9 @@ home: SlideDrawer(
 ),
 ```
 
-Or use a custom rotateAngle if you prefer to change the rotation a little bit lower.
+Or use a custom rotateAngle if we want to rotate it at a spesific angle.
 
-```
+```dart
 home: SlideDrawer(
   isRotate: true,
   rotateAngle: pi / 36,
@@ -258,8 +264,9 @@ home: SlideDrawer(
 ),
 ```
 
-Or you can change offsetFromRight to make it move a little closer or farther.
-```
+Or change offsetFromRight to make it move a little closer or farther.
+
+```dart
 home: SlideDrawer(
   offsetFromRight: 80.0,
   items: [
@@ -273,9 +280,9 @@ home: SlideDrawer(
 ),
 ```
 
-You can also use custom curve and duration if you want. The default values are linear and 300ms. You can also specify curveReverse and durationReverse to change curve and duration of animation in the reverse direction.
+We can also use custom curve and duration. The default values are linear and 300ms. We can specify curveReverse and durationReverse to change curve and duration of animation in the reverse direction.
 
-```
+```dart
 home: SlideDrawer(
   curve: Curves.easeInOut,
   duration: Duration(milliseconds: 200),
