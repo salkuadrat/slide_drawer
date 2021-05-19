@@ -76,7 +76,7 @@ class _AppState extends State<App> {
       ];
 
   _changeType(type) {
-    if (mounted)
+    if (this.type != type)
       setState(() {
         this.type = type;
         _appKey = UniqueKey();
