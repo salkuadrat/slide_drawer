@@ -16,15 +16,7 @@ or
 
 ```yaml
 dependencies:
-  slide_drawer: ^1.0.2
-```
-
-or
-
-```yaml
-dependencies:
-  slide_drawer:
-    git: https://github.com/salkuadrat/slide_drawer.git
+  slide_drawer: ^1.0.3
 ```
 
 Then run `flutter pub get`.

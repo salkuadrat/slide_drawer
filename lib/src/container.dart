@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:slide_drawer/src/alignment.dart';
 import 'package:slide_drawer/src/item.dart';
 
+import 'drawer.dart';
+
 class SlideDrawerContainer extends StatelessWidget {
   final Widget? drawer;
   final Widget? head;
@@ -116,7 +118,13 @@ class MenuItemWidget extends StatelessWidget {
       leading: _leading,
       contentPadding: EdgeInsets.only(left: _leading == null ? 24 : 16),
       title: Text(item.title),
-      onTap: item.onTap,
+      onTap: () {
+        if (item.isCloseDrawerWhenTapped) {
+          SlideDrawer.of(context)?.close();
+        }
+
+        item.onTap?.call();
+      },
     );
   }
 }

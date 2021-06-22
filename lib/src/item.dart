@@ -12,11 +12,19 @@ class MenuItem {
   /// Text to be used for the title of [MenuItemWidget]
   final String title;
 
+  final bool isCloseDrawerWhenTapped;
+
   /// Function to be called when this [MenuItemWidget] is tapped
   final void Function()? onTap;
 
   bool get hasIcon => icon != null;
   bool get hasLeading => leading != null;
 
-  MenuItem(this.title, {this.icon, this.leading, this.onTap});
+  MenuItem(
+    this.title, {
+    this.icon,
+    this.leading,
+    this.onTap,
+    this.isCloseDrawerWhenTapped = true,
+  });
 }
