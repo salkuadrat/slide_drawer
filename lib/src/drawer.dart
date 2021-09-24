@@ -76,6 +76,11 @@ class SlideDrawer extends StatefulWidget {
   /// Default is [pi / 2]
   final double rotateAngle;
 
+  /// The factor by which the shifted content gets scaled by
+  ///
+  /// Default is 0.25
+  final double scale;
+
   final Function? onWillPop;
 
   const SlideDrawer({
@@ -93,6 +98,7 @@ class SlideDrawer extends StatefulWidget {
     this.reverseDuration,
     this.reverseCurve,
     this.alignment,
+    this.scale = 0.25,
     this.offsetFromRight = 60.0,
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
@@ -208,13 +214,13 @@ class _SlideDrawerState extends State<SlideDrawer>
 
   Matrix4 get _transform => Matrix4.identity()
     ..translate(_maxSlide * _animation.value)
-    ..scale(1.0 - (0.25 * _animation.value))
+    ..scale(1.0 - (widget.scale * _animation.value))
     ..setEntry(3, 2, 0.001)
     ..rotateY(_animation.value * widget.rotateAngle);
 
   Matrix4 get _transformNoRotate => Matrix4.identity()
     ..translate(_maxSlide * _animation.value)
-    ..scale(1.0 - (0.25 * _animation.value));
+    ..scale(1.0 - (widget.scale * _animation.value));
 
   @override
   Widget build(BuildContext context) {
