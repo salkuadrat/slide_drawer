@@ -81,6 +81,11 @@ class SlideDrawer extends StatefulWidget {
   /// Default is 0.25
   final double scale;
 
+  /// If set to true the view will be built using ListView rather than Column
+  ///
+  /// Default false
+  final bool useListView;
+
   final Function? onWillPop;
 
   const SlideDrawer({
@@ -102,6 +107,7 @@ class SlideDrawer extends StatefulWidget {
     this.offsetFromRight = 60.0,
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
+    this.useListView = false,
     this.onWillPop,
   }) : super(key: key);
 
@@ -201,6 +207,7 @@ class _SlideDrawerState extends State<SlideDrawer>
   }
 
   Widget get _drawer => SlideDrawerContainer(
+        useListView: widget.useListView,
         alignment: widget.alignment,
         brightness: widget.brightness,
         backgroundColor: widget.backgroundColor,
