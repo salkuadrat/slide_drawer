@@ -86,7 +86,7 @@ class SlideDrawerContainer extends StatelessWidget {
       child: _hasDrawer
           ? drawer
           : Container(
-              height: MediaQuery.of(context).size.height,
+              height: useListView ? MediaQuery.of(context).size.height : null,
               decoration: _hasGradient
                   ? BoxDecoration(gradient: backgroundGradient)
                   : BoxDecoration(color: backgroundColor ?? theme.primaryColor),
