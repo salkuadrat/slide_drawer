@@ -95,6 +95,7 @@ class SlideDrawerContainer extends StatelessWidget {
                   data: ThemeData(
                       brightness: brightness ?? theme.primaryColorBrightness),
                   child: useListView ? ListView(
+                    physics: ClampingScrollPhysics(),
                     children: _buildChildren,
                   ) : Column(
                         mainAxisAlignment: _isAlignTop
