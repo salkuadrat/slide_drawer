@@ -86,6 +86,9 @@ class SlideDrawer extends StatefulWidget {
   /// Default false
   final bool useListView;
 
+  /// If defined it will be called before dragging from left to right starts
+  final Function? beforeLeftToRightDrag;
+
   final Function? onWillPop;
 
   const SlideDrawer({
@@ -108,6 +111,7 @@ class SlideDrawer extends StatefulWidget {
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
     this.useListView = false,
+    this.beforeLeftToRightDrag,
     this.onWillPop,
   }) : super(key: key);
 
@@ -178,6 +182,10 @@ class _SlideDrawerState extends State<SlideDrawer>
         _animation.isCompleted && details.globalPosition.dx > _maxDragStartEdge;
 
     _canBeDragged = isDragOpenFromLeft || isDragCloseFromRight;
+
+    if (isDragOpenFromLeft && widget.beforeLeftToRightDrag != null) {
+        widget.beforeLeftToRightDrag!();
+    }
   }
 
   _onDragUpdate(DragUpdateDetails details) {
