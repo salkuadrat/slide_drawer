@@ -87,7 +87,7 @@ class SlideDrawer extends StatefulWidget {
   final bool useListView;
 
   /// If defined it will be called before dragging from left to right starts
-  final Function? beforeLeftToRightDrag;
+  final Function? drawerJustOpened;
 
   final Function? onWillPop;
 
@@ -111,7 +111,7 @@ class SlideDrawer extends StatefulWidget {
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
     this.useListView = false,
-    this.beforeLeftToRightDrag,
+    this.drawerJustOpened,
     this.onWillPop,
   }) : super(key: key);
 
@@ -170,7 +170,12 @@ class _SlideDrawerState extends State<SlideDrawer>
     _initAnimation();
   }
 
-  open() => _animation.start();
+  open() => _animation.start().then((_) {
+    if (widget.drawerJustOpened != null) {
+      widget.drawerJustOpened!();
+    }
+  });
+
   close() => _animation.reverse();
   toggle() => isOpened ? close() : open();
 
@@ -183,9 +188,6 @@ class _SlideDrawerState extends State<SlideDrawer>
 
     _canBeDragged = isDragOpenFromLeft || isDragCloseFromRight;
 
-    if (isDragOpenFromLeft && widget.beforeLeftToRightDrag != null) {
-        widget.beforeLeftToRightDrag!();
-    }
   }
 
   _onDragUpdate(DragUpdateDetails details) {
@@ -206,7 +208,12 @@ class _SlideDrawerState extends State<SlideDrawer>
       double visualVelocity = details.velocity.pixelsPerSecond.dx /
           MediaQuery.of(context).size.width;
 
-      _animation.fling(velocity: visualVelocity);
+      _animation.fling(velocity: visualVelocity).then((_) {
+        if (visualVelocity > 0 && widget.drawerJustOpened != null) {
+          widget.drawerJustOpened!();
+        }
+      });
+
     } else if (_animation.value < 0.5) {
       close();
     } else {
