@@ -170,11 +170,7 @@ class _SlideDrawerState extends State<SlideDrawer>
     _initAnimation();
   }
 
-  open() => _animation.start().then((_) {
-    if (widget.drawerJustOpened != null) {
-      widget.drawerJustOpened!();
-    }
-  });
+  open() => _animation.start().then((_) => _invokeDrawerJustOpened());
 
   close() => _animation.reverse();
   toggle() => isOpened ? close() : open();
@@ -201,6 +197,9 @@ class _SlideDrawerState extends State<SlideDrawer>
     double _kMinFlingVelocity = 365.0;
 
     if (_animation.isDismissed || _animation.isCompleted) {
+      if (_animation.isCompleted) {
+        _invokeDrawerJustOpened();
+      }
       return;
     }
 
@@ -208,16 +207,18 @@ class _SlideDrawerState extends State<SlideDrawer>
       double visualVelocity = details.velocity.pixelsPerSecond.dx /
           MediaQuery.of(context).size.width;
 
-      _animation.fling(velocity: visualVelocity).then((_) {
-        if (visualVelocity > 0 && widget.drawerJustOpened != null) {
-          widget.drawerJustOpened!();
-        }
-      });
+      _animation.fling(velocity: visualVelocity);
 
     } else if (_animation.value < 0.5) {
       close();
     } else {
       open();
+    }
+  }
+
+  void _invokeDrawerJustOpened() {
+    if (widget.drawerJustOpened != null) {
+      widget.drawerJustOpened!();
     }
   }
 
