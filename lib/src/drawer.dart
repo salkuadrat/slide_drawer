@@ -207,7 +207,11 @@ class _SlideDrawerState extends State<SlideDrawer>
       double visualVelocity = details.velocity.pixelsPerSecond.dx /
           MediaQuery.of(context).size.width;
 
-      _animation.fling(velocity: visualVelocity);
+      _animation.fling(velocity: visualVelocity).then((value) {
+        if (visualVelocity > 0) {
+          _invokeDrawerJustOpened();
+        }
+      });
 
     } else if (_animation.value < 0.5) {
       close();
