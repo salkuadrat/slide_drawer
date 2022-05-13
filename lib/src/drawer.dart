@@ -4,7 +4,7 @@ import 'package:curved_animation_controller/curved_animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_drawer/src/alignment.dart';
 import 'package:slide_drawer/src/container.dart';
-import 'package:slide_drawer/src/item.dart';
+import 'package:slide_drawer/src/drawer_menu_item.dart';
 
 class SlideDrawer extends StatefulWidget {
   /// The gradient to use for the drawer background.
@@ -39,8 +39,8 @@ class SlideDrawer extends StatefulWidget {
   /// the default content drawer generated from [items]
   final Widget? contentDrawer;
 
-  /// List of [MenuItem] to be used to generate the default content drawer
-  final List<MenuItem> items;
+  /// List of [DrawerMenuItem] to be used to generate the default content drawer
+  final List<DrawerMenuItem> items;
 
   /// Duration of the drawer sliding animation
   ///

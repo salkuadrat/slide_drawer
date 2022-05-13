@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slide_drawer/src/alignment.dart';
-import 'package:slide_drawer/src/item.dart';
+import 'package:slide_drawer/src/drawer_menu_item.dart';
 
 import 'drawer.dart';
 
@@ -8,7 +8,7 @@ class SlideDrawerContainer extends StatelessWidget {
   final Widget? drawer;
   final Widget? head;
   final Widget? content;
-  final List<MenuItem> items;
+  final List<DrawerMenuItem> items;
   final double paddingRight;
   final bool useListView;
 
@@ -62,7 +62,7 @@ class SlideDrawerContainer extends StatelessWidget {
          child: content,
        ),
      if (!_hasContent && _hasItems)
-       for (MenuItem item in items)
+       for (DrawerMenuItem item in items)
          Container(
            margin: EdgeInsets.only(right: paddingRight),
            child: MenuItemWidget(item: item),
@@ -112,7 +112,7 @@ class SlideDrawerContainer extends StatelessWidget {
 }
 
 class MenuItemWidget extends StatelessWidget {
-  final MenuItem item;
+  final DrawerMenuItem item;
 
   MenuItemWidget({Key? key, required this.item}) : super(key: key);
 
