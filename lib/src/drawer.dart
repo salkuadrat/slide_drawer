@@ -4,7 +4,7 @@ import 'package:curved_animation_controller/curved_animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_drawer/src/alignment.dart';
 import 'package:slide_drawer/src/container.dart';
-import 'package:slide_drawer/src/item.dart';
+import 'package:slide_drawer/src/drawer_menu_item.dart';
 
 class SlideDrawer extends StatefulWidget {
   /// The gradient to use for the drawer background.
@@ -39,8 +39,8 @@ class SlideDrawer extends StatefulWidget {
   /// the default content drawer generated from [items]
   final Widget? contentDrawer;
 
-  /// List of [MenuItem] to be used to generate the default content drawer
-  final List<MenuItem> items;
+  /// List of [DrawerMenuItem] to be used to generate the default content drawer
+  final List<DrawerMenuItem> items;
 
   /// Duration of the drawer sliding animation
   ///
@@ -76,6 +76,19 @@ class SlideDrawer extends StatefulWidget {
   /// Default is [pi / 2]
   final double rotateAngle;
 
+  /// The factor by which the shifted content gets scaled by
+  ///
+  /// Default is 0.25
+  final double scale;
+
+  /// If set to true the view will be built using ListView rather than Column
+  ///
+  /// Default false
+  final bool useListView;
+
+  /// If defined it will be called before dragging from left to right starts
+  final Function? drawerJustOpened;
+
   final Function? onWillPop;
 
   const SlideDrawer({
@@ -93,9 +106,12 @@ class SlideDrawer extends StatefulWidget {
     this.reverseDuration,
     this.reverseCurve,
     this.alignment,
+    this.scale = 0.25,
     this.offsetFromRight = 60.0,
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
+    this.useListView = false,
+    this.drawerJustOpened,
     this.onWillPop,
   }) : super(key: key);
 
@@ -154,7 +170,8 @@ class _SlideDrawerState extends State<SlideDrawer>
     _initAnimation();
   }
 
-  open() => _animation.start();
+  open() => _animation.start().then((_) => _invokeDrawerJustOpened());
+
   close() => _animation.reverse();
   toggle() => isOpened ? close() : open();
 
@@ -166,6 +183,7 @@ class _SlideDrawerState extends State<SlideDrawer>
         _animation.isCompleted && details.globalPosition.dx > _maxDragStartEdge;
 
     _canBeDragged = isDragOpenFromLeft || isDragCloseFromRight;
+
   }
 
   _onDragUpdate(DragUpdateDetails details) {
@@ -179,6 +197,9 @@ class _SlideDrawerState extends State<SlideDrawer>
     double _kMinFlingVelocity = 365.0;
 
     if (_animation.isDismissed || _animation.isCompleted) {
+      if (_animation.isCompleted) {
+        _invokeDrawerJustOpened();
+      }
       return;
     }
 
@@ -186,7 +207,12 @@ class _SlideDrawerState extends State<SlideDrawer>
       double visualVelocity = details.velocity.pixelsPerSecond.dx /
           MediaQuery.of(context).size.width;
 
-      _animation.fling(velocity: visualVelocity);
+      _animation.fling(velocity: visualVelocity).then((value) {
+        if (visualVelocity > 0) {
+          _invokeDrawerJustOpened();
+        }
+      });
+
     } else if (_animation.value < 0.5) {
       close();
     } else {
@@ -194,7 +220,14 @@ class _SlideDrawerState extends State<SlideDrawer>
     }
   }
 
+  void _invokeDrawerJustOpened() {
+    if (widget.drawerJustOpened != null) {
+      widget.drawerJustOpened!();
+    }
+  }
+
   Widget get _drawer => SlideDrawerContainer(
+        useListView: widget.useListView,
         alignment: widget.alignment,
         brightness: widget.brightness,
         backgroundColor: widget.backgroundColor,
@@ -208,13 +241,13 @@ class _SlideDrawerState extends State<SlideDrawer>
 
   Matrix4 get _transform => Matrix4.identity()
     ..translate(_maxSlide * _animation.value)
-    ..scale(1.0 - (0.25 * _animation.value))
+    ..scale(1.0 - (widget.scale * _animation.value))
     ..setEntry(3, 2, 0.001)
     ..rotateY(_animation.value * widget.rotateAngle);
 
   Matrix4 get _transformNoRotate => Matrix4.identity()
     ..translate(_maxSlide * _animation.value)
-    ..scale(1.0 - (0.25 * _animation.value));
+    ..scale(1.0 - (widget.scale * _animation.value));
 
   @override
   Widget build(BuildContext context) {

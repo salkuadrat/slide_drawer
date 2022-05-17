@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slide_drawer/src/alignment.dart';
-import 'package:slide_drawer/src/item.dart';
+import 'package:slide_drawer/src/drawer_menu_item.dart';
 
 import 'drawer.dart';
 
@@ -8,8 +8,9 @@ class SlideDrawerContainer extends StatelessWidget {
   final Widget? drawer;
   final Widget? head;
   final Widget? content;
-  final List<MenuItem> items;
+  final List<DrawerMenuItem> items;
   final double paddingRight;
+  final bool useListView;
 
   /// The gradient to use for the background.
   ///
@@ -41,6 +42,7 @@ class SlideDrawerContainer extends StatelessWidget {
   SlideDrawerContainer({
     Key? key,
     required this.drawer,
+    required this.useListView,
     this.head,
     this.content,
     this.items = const [],
@@ -50,6 +52,23 @@ class SlideDrawerContainer extends StatelessWidget {
     this.alignment,
     this.paddingRight = 0,
   }) : super(key: key);
+
+  List<Widget> get _buildChildren {
+   return [
+     if (_hasHead) head!,
+     if (_hasContent)
+       Container(
+         margin: EdgeInsets.only(right: paddingRight),
+         child: content,
+       ),
+     if (!_hasContent && _hasItems)
+       for (DrawerMenuItem item in items)
+         Container(
+           margin: EdgeInsets.only(right: paddingRight),
+           child: MenuItemWidget(item: item),
+         )
+   ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +86,7 @@ class SlideDrawerContainer extends StatelessWidget {
       child: _hasDrawer
           ? drawer
           : Container(
+              height: useListView ? MediaQuery.of(context).size.height : null,
               decoration: _hasGradient
                   ? BoxDecoration(gradient: backgroundGradient)
                   : BoxDecoration(color: backgroundColor ?? theme.primaryColor),
@@ -74,25 +94,15 @@ class SlideDrawerContainer extends StatelessWidget {
                 child: Theme(
                   data: ThemeData(
                       brightness: brightness ?? theme.primaryColorBrightness),
-                  child: Column(
-                    mainAxisAlignment: _isAlignTop
-                        ? MainAxisAlignment.start
-                        : MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (_hasHead) head!,
-                      if (_hasContent)
-                        Container(
-                          margin: EdgeInsets.only(right: paddingRight),
-                          child: content,
-                        ),
-                      if (!_hasContent && _hasItems)
-                        for (MenuItem item in items)
-                          Container(
-                            margin: EdgeInsets.only(right: paddingRight),
-                            child: MenuItemWidget(item: item),
-                          ),
-                    ],
+                  child: useListView ? ListView(
+                    physics: ClampingScrollPhysics(),
+                    children: _buildChildren,
+                  ) : Column(
+                        mainAxisAlignment: _isAlignTop
+                            ? MainAxisAlignment.start
+                            : MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: _buildChildren,
                   ),
                 ),
               ),
@@ -102,7 +112,7 @@ class SlideDrawerContainer extends StatelessWidget {
 }
 
 class MenuItemWidget extends StatelessWidget {
-  final MenuItem item;
+  final DrawerMenuItem item;
 
   MenuItemWidget({Key? key, required this.item}) : super(key: key);
 
