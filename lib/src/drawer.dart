@@ -39,8 +39,8 @@ class SlideDrawer extends StatefulWidget {
   /// the default content drawer generated from [items]
   final Widget? contentDrawer;
 
-  /// List of [MenuItem] to be used to generate the default content drawer
-  final List<MenuItem> items;
+  /// List of [SlideMenuItem] to be used to generate the default content drawer
+  final List<SlideMenuItem> items;
 
   /// Duration of the drawer sliding animation
   ///

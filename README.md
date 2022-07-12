@@ -35,7 +35,7 @@ import 'package:slide_drawer/slide_drawer.dart';
 
 Then wrap the app home page with SlideDrawer. 
 
-To use the basic SlideDrawer, you only need to define items (List of MenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer background, and theme brightness as drawer brightness.
+To use the basic SlideDrawer, you only need to define items (List of SlideMenuItem) to generate menu in your drawer. The drawer will use your default theme color as drawer background, and theme brightness as drawer brightness.
 
 ```dart
 class App extends StatelessWidget {
@@ -52,11 +52,11 @@ class App extends StatelessWidget {
       // wrap your HomePage with SlideDrawer
       home: SlideDrawer(
         items: [
-          MenuItem('Home', onTap: (){}),
-          MenuItem('Project', onTap: (){}),
-          MenuItem('Favourite', onTap: (){}),
-          MenuItem('Profile', onTap: (){}),
-          MenuItem('Setting', onTap: (){}),
+          SlideMenuItem('Home', onTap: (){}),
+          SlideMenuItem('Project', onTap: (){}),
+          SlideMenuItem('Favourite', onTap: (){}),
+          SlideMenuItem('Profile', onTap: (){}),
+          SlideMenuItem('Setting', onTap: (){}),
         ],
         child: HomePage(),
       ),
@@ -86,11 +86,11 @@ We can also use icon for menu items.
 ```dart
 home: SlideDrawer(
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   child: HomePage(),
 ),
@@ -110,11 +110,11 @@ If we set light color, use Brightness.light.
 // SlideDrawer with custom gradient as background.
 home: SlideDrawer(
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   brightness: Brightness.dark,
   backgroundGradient: LinearGradient(
@@ -134,11 +134,11 @@ home: SlideDrawer(
 // SlideDrawer with custom color as background.
 home: SlideDrawer(
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   brightness: Brightness.dark,
   backgroundColor: Colors.blue[900],
@@ -155,11 +155,11 @@ home: SlideDrawer(
   alignment: SlideDrawerAlignment.start,
   headDrawer: Image.asset('boys.png'),
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   brightness: Brightness.dark,
   backgroundColor: Colors.blue[900],
@@ -229,11 +229,11 @@ If don't want to rotate, we can disable the rotation by setting isRotate to fals
 home: SlideDrawer(
   isRotate: false,
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   child: HomePage(),
 ),
@@ -246,11 +246,11 @@ home: SlideDrawer(
   isRotate: true,
   rotateAngle: pi / 36,
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   child: HomePage(),
 ),
@@ -262,11 +262,11 @@ Or change offsetFromRight to make it move a little closer or farther.
 home: SlideDrawer(
   offsetFromRight: 80.0,
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   child: HomePage(),
 ),
@@ -279,11 +279,11 @@ home: SlideDrawer(
   curve: Curves.easeInOut,
   duration: Duration(milliseconds: 200),
   items: [
-    MenuItem('Home', icon: Icons.home, onTap: (){}),
-    MenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
-    MenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
-    MenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
-    MenuItem('Setting', icon: Icons.settings, onTap: (){}),
+    SlideMenuItem('Home', icon: Icons.home, onTap: (){}),
+    SlideMenuItem('Project', icon:Icons.rss_feed, onTap: (){}),
+    SlideMenuItem('Favourite', icon: Icons.favorite_border, onTap: (){}),
+    SlideMenuItem('Profile', icon: Icons.person_outline, onTap: (){}),
+    SlideMenuItem('Setting', icon: Icons.settings, onTap: (){}),
   ],
   child: HomePage(),
 ),
