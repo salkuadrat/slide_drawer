@@ -1,12 +1,16 @@
 import 'dart:math';
 
 import 'package:curved_animation_controller/curved_animation_controller.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide MenuItem;
 import 'package:slide_drawer/src/alignment.dart';
 import 'package:slide_drawer/src/container.dart';
 import 'package:slide_drawer/src/item.dart';
+import 'package:slide_drawer/src/slide_direction.dart';
 
 class SlideDrawer extends StatefulWidget {
+  /// ltr/rtl direction for the drawer.
+  final SlideDirection? direction;
+
   /// The gradient to use for the drawer background.
   ///
   /// If this is null, then [background] is used.
@@ -65,6 +69,11 @@ class SlideDrawer extends StatefulWidget {
   /// Default is 60.0
   final double offsetFromRight;
 
+  /// Offset from left to calculate the end point of sliding animation
+  ///
+  /// Default is 60.0
+  final double offsetFromLeft;
+
   /// Whether you want to rotate the [child] in the sliding animation
   ///
   /// Default is [true]
@@ -82,6 +91,7 @@ class SlideDrawer extends StatefulWidget {
     Key? key,
     this.items = const [],
     this.drawer,
+    this.direction = SlideDirection.ltr,
     this.headDrawer,
     this.contentDrawer,
     required this.child,
@@ -94,6 +104,7 @@ class SlideDrawer extends StatefulWidget {
     this.reverseCurve,
     this.alignment,
     this.offsetFromRight = 60.0,
+    this.offsetFromLeft = 60.0,
     this.rotateAngle = (pi / 24),
     this.isRotate = true,
     this.onWillPop,
@@ -194,6 +205,12 @@ class _SlideDrawerState extends State<SlideDrawer>
     }
   }
 
+  double getTranslate() {
+    return widget.direction == SlideDirection.ltr
+        ? (_maxSlide * _animation.value)
+        : -(_maxSlide * _animation.value) / 3;
+  }
+
   Widget get _drawer => SlideDrawerContainer(
         alignment: widget.alignment,
         brightness: widget.brightness,
@@ -202,12 +219,13 @@ class _SlideDrawerState extends State<SlideDrawer>
         head: widget.headDrawer,
         content: widget.contentDrawer,
         drawer: widget.drawer,
+        direction: widget.direction,
         items: widget.items,
         paddingRight: widget.offsetFromRight,
+        paddingLeft: widget.offsetFromRight,
       );
-
   Matrix4 get _transform => Matrix4.identity()
-    ..translate(_maxSlide * _animation.value)
+    ..translate(getTranslate())
     ..scale(1.0 - (0.25 * _animation.value))
     ..setEntry(3, 2, 0.001)
     ..rotateY(_animation.value * widget.rotateAngle);

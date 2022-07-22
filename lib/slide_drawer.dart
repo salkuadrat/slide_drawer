@@ -4,3 +4,4 @@ export './src/alignment.dart';
 export 'src/container.dart';
 export './src/drawer.dart';
 export './src/item.dart';
+export './src/slide_direction.dart';
