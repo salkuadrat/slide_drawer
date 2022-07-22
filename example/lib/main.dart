@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide MenuItem;
 import 'package:slide_drawer/slide_drawer.dart';
 
 void main() {
@@ -95,6 +95,8 @@ class _AppState extends State<App> {
   }
 
   Widget get _basic => SlideDrawer(
+        direction: SlideDirection.ltr,
+        offsetFromLeft: 60,
         child: HomePage(),
         items: _items,
       );

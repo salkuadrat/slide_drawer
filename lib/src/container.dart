@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide MenuItem;
+import 'package:slide_drawer/slide_drawer.dart';
 import 'package:slide_drawer/src/alignment.dart';
 import 'package:slide_drawer/src/item.dart';
 
@@ -10,6 +11,8 @@ class SlideDrawerContainer extends StatelessWidget {
   final Widget? content;
   final List<MenuItem> items;
   final double paddingRight;
+  final double paddingLeft;
+  final SlideDirection? direction;
 
   /// The gradient to use for the background.
   ///
@@ -38,18 +41,20 @@ class SlideDrawerContainer extends StatelessWidget {
   bool get _hasContent => content != null;
   bool get _hasGradient => backgroundGradient != null;
 
-  SlideDrawerContainer({
-    Key? key,
-    required this.drawer,
-    this.head,
-    this.content,
-    this.items = const [],
-    this.brightness,
-    this.backgroundColor,
-    this.backgroundGradient,
-    this.alignment,
-    this.paddingRight = 0,
-  }) : super(key: key);
+  SlideDrawerContainer(
+      {Key? key,
+      required this.drawer,
+      this.head,
+      this.content,
+      this.items = const [],
+      this.brightness,
+      this.backgroundColor,
+      this.backgroundGradient,
+      this.alignment,
+      this.direction = SlideDirection.ltr,
+      this.paddingRight = 0,
+      this.paddingLeft = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +88,29 @@ class SlideDrawerContainer extends StatelessWidget {
                       if (_hasHead) head!,
                       if (_hasContent)
                         Container(
-                          margin: EdgeInsets.only(right: paddingRight),
+                          margin: EdgeInsets.only(
+                              left: direction == SlideDirection.rtl
+                                  ? paddingLeft
+                                  : 0,
+                              right: direction == SlideDirection.ltr
+                                  ? paddingRight
+                                  : 0),
                           child: content,
                         ),
                       if (!_hasContent && _hasItems)
                         for (MenuItem item in items)
                           Container(
-                            margin: EdgeInsets.only(right: paddingRight),
-                            child: MenuItemWidget(item: item),
+                            margin: EdgeInsets.only(
+                                left: direction == SlideDirection.rtl
+                                    ? paddingLeft
+                                    : 7,
+                                right: direction == SlideDirection.ltr
+                                    ? paddingRight
+                                    : 0),
+                            child: MenuItemWidget(
+                              item: item,
+                              direction: direction,
+                            ),
                           ),
                     ],
                   ),
@@ -103,8 +123,10 @@ class SlideDrawerContainer extends StatelessWidget {
 
 class MenuItemWidget extends StatelessWidget {
   final MenuItem item;
+  final SlideDirection? direction;
 
-  MenuItemWidget({Key? key, required this.item}) : super(key: key);
+  MenuItemWidget({Key? key, required this.item, required this.direction})
+      : super(key: key);
 
   Widget? get _leading {
     if (item.hasLeading) return item.leading!;
@@ -114,17 +136,32 @@ class MenuItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: _leading,
-      contentPadding: EdgeInsets.only(left: _leading == null ? 24 : 16),
-      title: Text(item.title),
-      onTap: () {
-        if (item.isCloseDrawerWhenTapped) {
-          SlideDrawer.of(context)?.close();
-        }
+    return Directionality(
+      textDirection: direction == SlideDirection.ltr
+          ? TextDirection.ltr
+          : TextDirection.rtl,
+      child: ListTile(
+        leading: _leading,
+        contentPadding: EdgeInsets.only(
+            left: direction == SlideDirection.ltr
+                ? _leading == null
+                    ? 24
+                    : 16
+                : 0,
+            right: direction == SlideDirection.rtl
+                ? _leading == null
+                    ? 24
+                    : 16
+                : 0),
+        title: Text(item.title),
+        onTap: () {
+          if (item.isCloseDrawerWhenTapped) {
+            SlideDrawer.of(context)?.close();
+          }
 
-        item.onTap?.call();
-      },
+          item.onTap?.call();
+        },
+      ),
     );
   }
 }

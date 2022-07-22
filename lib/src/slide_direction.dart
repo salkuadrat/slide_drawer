@@ -1,0 +1,1 @@
+enum SlideDirection { ltr, rtl }
