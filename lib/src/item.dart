@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MenuItem {
+class SlideDrawerMenuItem {
   /// Widget to be used for the leading of [MenuTtemWidget]
   ///
   /// If this is null, then it will use Icon with IconData from [icon]
@@ -20,7 +20,7 @@ class MenuItem {
   bool get hasIcon => icon != null;
   bool get hasLeading => leading != null;
 
-  MenuItem(
+  SlideDrawerMenuItem(
     this.title, {
     this.icon,
     this.leading,

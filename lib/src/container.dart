@@ -8,7 +8,7 @@ class SlideDrawerContainer extends StatelessWidget {
   final Widget? drawer;
   final Widget? head;
   final Widget? content;
-  final List<MenuItem> items;
+  final List<SlideDrawerMenuItem> items;
   final double paddingRight;
 
   /// The gradient to use for the background.
@@ -90,7 +90,7 @@ class SlideDrawerContainer extends StatelessWidget {
                         for (MenuItem item in items)
                           Container(
                             margin: EdgeInsets.only(right: paddingRight),
-                            child: MenuItemWidget(item: item),
+                            child: SlideDrawerMenuItemWidget(item: item),
                           ),
                     ],
                   ),
@@ -101,10 +101,10 @@ class SlideDrawerContainer extends StatelessWidget {
   }
 }
 
-class MenuItemWidget extends StatelessWidget {
-  final MenuItem item;
+class SlideDrawerMenuItemWidget extends StatelessWidget {
+  final SlideDrawerMenuItem item;
 
-  MenuItemWidget({Key? key, required this.item}) : super(key: key);
+  SlideDrawerMenuItemWidget({Key? key, required this.item}) : super(key: key);
 
   Widget? get _leading {
     if (item.hasLeading) return item.leading!;
