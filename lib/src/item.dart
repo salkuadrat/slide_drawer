@@ -6,15 +6,15 @@ class SlideDrawerMenuItem {
   /// If this is null, then it will use Icon with IconData from [icon]
   final Widget? leading;
 
-  /// Icon to be used in the leading widget of [MenuItemWidget]
+  /// Icon to be used in the leading widget of [SlideDrawerMenuItemWidget]
   final IconData? icon;
 
-  /// Text to be used for the title of [MenuItemWidget]
+  /// Text to be used for the title of [SlideDrawerMenuItemWidget]
   final String title;
 
   final bool isCloseDrawerWhenTapped;
 
-  /// Function to be called when this [MenuItemWidget] is tapped
+  /// Function to be called when this [SlideDrawerMenuItemWidget] is tapped
   final void Function()? onTap;
 
   bool get hasIcon => icon != null;
